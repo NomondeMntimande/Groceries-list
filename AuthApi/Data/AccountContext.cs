@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using AuthApi.Dtos.Enteties;
 
 namespace AuthApi.Data
 {
@@ -10,7 +11,7 @@ namespace AuthApi.Data
             : base(options)
         {
         }
-
+        public DbSet<GroceriesList> GroceriesList { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             // It would be a good idea to move the connection string to user secrets

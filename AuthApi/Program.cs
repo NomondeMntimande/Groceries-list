@@ -1,5 +1,7 @@
 using AuthApi.Data;
+using AuthApi.Helpers;
 using AuthApi.Services;
+using AuthApi.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -9,9 +11,11 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddDbContext<AccountContext>();
 builder.Services.AddScoped<TokenService, TokenService>();
-builder.Services.AddControllers();
+builder.Services.AddScoped(typeof(IGroceriesListService), typeof(GroceriesListService));
+builder.Services.AddScoped(typeof(Mapping));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
