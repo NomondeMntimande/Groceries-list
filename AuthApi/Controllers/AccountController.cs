@@ -1,90 +1,112 @@
-﻿using AuthApi.Data;
+﻿
 using AuthApi.Dtos;
-using AuthApi.Responses;
+using AuthApi.Dtos.Enteties;
+
 using AuthApi.Services;
+using AuthApi.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Win32;
+
 
 namespace AuthApi.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly AccountContext _context;
-        private readonly TokenService _tokenService;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly ITokenService _tokenService;
 
-        public AccountController(UserManager<IdentityUser> userManager, AccountContext context, TokenService tokenService)
+        public AccountController(UserManager<User> userManager, ITokenService tokenService, SignInManager<User> signInManager)
         {
             _userManager = userManager;
-            _context = context;
             _tokenService = tokenService;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
-        [HttpPost]
-        [Route("register")]
-        public async Task<ActionResult<User>> Register(Registration register)
+        [AllowAnonymous]
+        [HttpPost("registers")]
+        [Authorize("RequireAdminRole")]
+        public async Task<IActionResult> Register([FromBody] Registration model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var result = await _userManager.CreateAsync(
-                new IdentityUser { UserName = register.Username, Email = register.Email },
-            register.Password
-            );
-
-            if (result.Succeeded)
+            var user = new User
             {
-                register.Password = "";
-                return CreatedAtAction(nameof(Register), new { email = register.Email }, register);
-            }
+                UserName = model.Email,
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName
+            };
 
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(error.Code, error.Description);
-            }
-            return BadRequest(ModelState);
-        }
+            var result = await _userManager.CreateAsync(user, model.Password);
 
-        [HttpPost]
-        [Route("login")]
-        public async Task<ActionResult<AuthenticationResponse>> Authenticate([FromBody] Authentication request)
-        {
-            if (!ModelState.IsValid)
+            if (!result.Succeeded)
             {
+                AddErrorsToModelState(result.Errors);
                 return BadRequest(ModelState);
             }
 
-            var managedUser = await _userManager.FindByEmailAsync(request.Email);
+            await _userManager.AddToRoleAsync(user, "User");
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-            if (managedUser == null)
+            // Send confirmation email implementation(to be added)!!
+            return Ok(new
             {
-                return BadRequest("Bad credentials");
-            }
-
-            var isPasswordValid = await _userManager.CheckPasswordAsync(managedUser, request.Password);
-
-            if (!isPasswordValid)
-            {
-                return BadRequest("Bad credentials");
-            }
-
-            var userInDb = _context.Users.FirstOrDefault(u => u.Email == request.Email);
-            if (userInDb is null)
-                return Unauthorized();
-
-            var accessToken = _tokenService.CreateToken(userInDb);
-            await _context.SaveChangesAsync();
-
-            return Ok(new AuthenticationResponse
-            {
-                Username = userInDb.UserName,
-                Email = userInDb.Email,
-                Token = accessToken,
+                Success = true,
+                username = user.UserName,
+                token = await _tokenService.CreateToken(user)
             });
         }
+
+
+        private void AddErrorsToModelState(IEnumerable<IdentityError> errors)
+        {
+            foreach (var error in errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+        }
+
+
+        [AllowAnonymous]
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(Authentication model)
+        {
+            try
+            {
+                var user = await _userManager.FindByEmailAsync(model.Username);
+
+                if (user == null)
+                {
+                    return Unauthorized();
+                }
+
+                var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
+
+                if (result.Succeeded)
+                {
+                    //return Ok(await _tokenService.GenerateToken(user));
+                    return Ok(new
+                    {
+                        username = user.Email,
+                        token = await _tokenService.CreateToken(user)
+                    });
+                }
+
+                return Unauthorized();
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message, nameof(model));
+            }
+        }
+              
     }
 }

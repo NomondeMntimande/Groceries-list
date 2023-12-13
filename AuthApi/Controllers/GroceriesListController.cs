@@ -28,58 +28,93 @@ namespace AuthApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<GroceriesList>> GetGroceriesList(int id)
         {
-            var list = await _groceries.GetGroceriesListAsync(id);
-            if (list == null)
+            try
             {
-                return NotFound();
+                var list = await _groceries.GetGroceriesListAsync(id);
+                if (list == null)
+                {
+                    return NotFound();
+                }
+                return Ok(list);
             }
-            return Ok(list);
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateGroceriesList(int id, GroceriesListDtos groceriesList)
         {
-            if (id != groceriesList.Id)
+            try
             {
-                return BadRequest();
-            }
+                if (id != groceriesList.Id)
+                {
+                    return BadRequest();
+                }
 
-            var updatedList = await _groceries.UpdateGroceriesListAsync(id, groceriesList);
-            if (updatedList == null)
+                var updatedList = await _groceries.UpdateGroceriesListAsync(id, groceriesList);
+                if (updatedList == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(updatedList);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
-            }
 
-            return Ok(updatedList);
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+
+
+            }
         }
 
-        [HttpPost]
+            [HttpPost]
         public async Task<ActionResult<GroceriesList>> CreateGroceriesList(GroceriesListDtos groceriesList)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var operationResult = await _groceries.CreateGroceriesListAsync(groceriesList);
+
+                if (operationResult.Status == OperationResultStatus.Success)
+                {
+                    return Ok(operationResult.Data);
+                }
+
+                return BadRequest(operationResult.Message);
             }
-
-            var operationResult = await _groceries.CreateGroceriesListAsync(groceriesList);
-
-            if (operationResult.Status == OperationResultStatus.Success)
+            catch (Exception ex)
             {
-                return Ok(operationResult.Data);
+                return StatusCode(500, $"An error occurred: {ex.Message}");
             }
-
-            return BadRequest(operationResult.Message);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGroceriesList(int id)
         {
-            var deletedList = await _groceries.DeleteGroceriesListAsync(id);
-            if (deletedList == null)
+            try
             {
-                return NotFound();
+                var deletedList = await _groceries.DeleteGroceriesListAsync(id);
+                if (deletedList == null)
+                {
+                    return NotFound();
+                }
+                return Ok(deletedList);
             }
-            return Ok(deletedList);
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, errorMessage = ex.Message });
+
+            }
+
         }
     }
 }

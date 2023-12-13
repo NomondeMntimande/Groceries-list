@@ -5,6 +5,8 @@ C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\AuthApi.dep
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\AuthApi.runtimeconfig.json
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\AuthApi.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\AuthApi.pdb
+C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\AutoMapper.dll
+C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Humanizer.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
@@ -19,6 +21,7 @@ C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Microsoft.E
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
@@ -32,12 +35,17 @@ C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Microsoft.I
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Mono.TextTemplating.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Npgsql.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\System.CodeDom.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\System.Text.Json.dll
+C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\obj\Debug\net6.0\AuthApi.csproj.AssemblyReference.cache
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\obj\Debug\net6.0\AuthApi.GeneratedMSBuildEditorConfig.editorconfig
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\obj\Debug\net6.0\AuthApi.AssemblyInfoInputs.cache
@@ -59,3 +67,4 @@ C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\obj\Debug\net6.0\refint\Auth
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\obj\Debug\net6.0\AuthApi.pdb
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\obj\Debug\net6.0\AuthApi.genruntimeconfig.cache
 C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\obj\Debug\net6.0\ref\AuthApi.dll
+C:\Dev\Upskilling\GroceryApp\ApplicationApp\AuthApi\bin\Debug\net6.0\Newtonsoft.Json.dll
